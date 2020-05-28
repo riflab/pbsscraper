@@ -5,5 +5,4 @@ Scrap weboreder PBS
 * 20200528 first time upload to master
 
 # credit
-http://github.com - automatic!
-[GitHub](http://github.com)
+[RifLab](https://riflab.com)
