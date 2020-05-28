@@ -1,8 +1,11 @@
-# webscraper_weborder
-Scrap weboreder PBS
+# Description
+webscraper_webrder is a code to scrap weboreder PBS
 
-# change log
+# Change log
 * 20200528 first time upload to master
 
-# credit
-[RifLab](https://riflab.com)
+# Contact
+arif.darmawan@riflab.com
+
+# Credit
+RifLab - [www.riflab.com](https://riflab.com)
