@@ -11,7 +11,7 @@ from mod import judul_checker, print_bukalapak, image_rename, deskripsi_checker
 import requests
 import re
 
-def main(response, f_bukalapak, penerbit='-'):
+def scrap(response, f_bukalapak, penerbit='-'):
     page_soup = soup(response.text, "html.parser")
     
     product_items = page_soup.find_all("div",{"class":"product-item"})
@@ -38,7 +38,7 @@ def main(response, f_bukalapak, penerbit='-'):
                 temp1 = image_rename(penerbit)
                 temp2 = image_rename(judul)
                 
-                d = open('deskripsi/' + temp1 + '___' + temp2 + '.txt','w')
+                d = open('../deskripsi/' + temp1 + '___' + temp2 + '.txt','w')
                 
                 desc_text = deskripsi_checker(str(deskripsi))
                 
@@ -47,13 +47,13 @@ def main(response, f_bukalapak, penerbit='-'):
                 print(judul)
                 # f.write(judul + ',' + penerbit + ',' + stok + ',' + berat + ',' + tag + ',' + jual + ',' + beli + ',' + penerbit + '___' + judul +'.jpg' + '\n')
                 
-                url_gambar = 'gambar/' + temp1 + '___' + temp2 + '.jpg'
+                url_gambar = '../gambar/' + temp1 + '___' + temp2 + '.jpg'
                 
-                print_bukalapak(f_bukalapak, judul, stok, berat, beli, tag, penerbit, url_gambar, desc_text)
+                print_bukalapak(f_bukalapak, judul, stok, berat, beli, tag, penerbit, url_gambar[3:], desc_text)
                 
-                # link_img = images[i].img.get("src")
-                # with open(url_gambar, "wb") as img:
-                #     img.write(requests.get(link_img).content)
+                link_img = images[i].img.get("src")
+                with open(url_gambar, "wb") as img:
+                    img.write(requests.get(link_img).content)
 
         except: 
             stok = berat = tag = jual = beli = '-'
@@ -68,5 +68,5 @@ if __name__ == '__main__':
     
     f_bukalapak = open("bukalapak.csv", "w")
 
-    main(response, f_bukalapak,'Pustaka Alhaf')
+    scrap(response, f_bukalapak,'Pustaka Alhaf')
     f_bukalapak.close()
