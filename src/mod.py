@@ -66,7 +66,7 @@ def print_bukalapak(f_bukalapak, judul, stok, berat, beli, tag, penerbit, url_ga
     beli = markup_beli(beli)
     stok = stok_checker(stok)
     
-    desc = judul + '. ' + tag + '. ' + penerbit 
+    desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang' 
     
     f_bukalapak.write(judul + ',' + 
                       stok + ',' + 
@@ -79,13 +79,3 @@ def print_bukalapak(f_bukalapak, judul, stok, berat, beli, tag, penerbit, url_ga
                       domain + url_gambar + ',' +
                       penerbit + ',' +
                       tag + '\n')
-
-if __name__ == '__main__':
-    
-    # judul = 'MUSHAF Karakteristik Mereka Yang Dicintai Allah Darul Haq'
-    
-    # judul_checker(judul.title())
-    
-    stok = str(-8)
-    
-    print(stok)
