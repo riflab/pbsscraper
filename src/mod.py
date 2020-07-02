@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr 30 13:28:26 2020
+https://github.com/riflab/pbsscraper.git
 
 @author: Arif Darmawan
+email: arif.darmawan@riflab.com
 """
 
 import re
@@ -60,22 +61,55 @@ def judul_checker(judul):
     
     return judul.title()
 
-def print_bukalapak(f_bukalapak, judul, stok, berat, beli, tag, penerbit, url_gambar, desc_text):
+def print_bukalapak(index_BL, f_bukalapak, judul, stok, berat, beli, tag, penerbit, url_gambar, desc_text):
     
     domain = 'https://alhaf.com/'
     beli = markup_beli(beli)
     stok = stok_checker(stok)
     
-    desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang' 
+    desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
+
+    f_bukalapak.write(index_BL, 1, judul)
+    f_bukalapak.write(index_BL, 2, stok)
+    f_bukalapak.write(index_BL, 3, berat)
+    f_bukalapak.write(index_BL, 4, beli)
+    f_bukalapak.write(index_BL, 5, 'Baru')
+    f_bukalapak.write(index_BL, 6, desc)
+    f_bukalapak.write(index_BL, 7, 'Tidak')
+    f_bukalapak.write(index_BL, 8, 'j&tr | jner | tikir | wahana')
+    f_bukalapak.write(index_BL, 9, domain + url_gambar)
+
+def print_tokopedia(index_TP, f_tokopedia, judul, stok, berat, beli, tag, penerbit, url_gambar, desc_text):
     
-    f_bukalapak.write(judul + ',' + 
-                      stok + ',' + 
-                      berat + ',' + 
-                      beli + ',' +
-                      'Baru' + ',' +
-                      desc + ',' + 
-                      'Tidak' + ',' + 
-                      'j&tr | jner | tikir | wahana' + ',' + 
-                      domain + url_gambar + ',' +
-                      penerbit + ',' +
-                      tag + '\n')
+    SKU = 1
+
+    if tag == ' Buku Sunnah':
+        tagN = 3324
+        etalase = 24393635
+    elif tag == ' Buku Anak':
+        tagN = 3373
+        etalase = 24393641
+    elif tag == ' Mushaf Al Quran':
+        tagN = 826
+        etalase = 24393638
+    
+    domain = 'https://alhaf.com/'
+    beli = markup_beli(beli)
+    stok = stok_checker(stok)
+
+    desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.' 
+
+    f_tokopedia.write(index_TP, 1, judul)
+    f_tokopedia.write(index_TP, 2, SKU)
+    f_tokopedia.write(index_TP, 3, tagN)
+    f_tokopedia.write(index_TP, 4, desc)
+    f_tokopedia.write(index_TP, 5, beli)
+    f_tokopedia.write(index_TP, 6, berat)
+    f_tokopedia.write(index_TP, 7, 1)
+    f_tokopedia.write(index_TP, 8, 'Aktif')
+    f_tokopedia.write(index_TP, 9, stok)
+    f_tokopedia.write(index_TP, 10, etalase)
+    f_tokopedia.write(index_TP, 11, '')
+    f_tokopedia.write(index_TP, 12, '')
+    f_tokopedia.write(index_TP, 13, 'Baru')
+    f_tokopedia.write(index_TP, 14, domain + url_gambar)
