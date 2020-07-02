@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+https://github.com/riflab/pbsscraper.git
+
+@author: Arif Darmawan
+email: arif.darmawan@riflab.com
+"""
+
 def hd():
 
     headers = {
@@ -11,9 +19,7 @@ def hd():
     'sec-fetch-dest': 'document',
     'referer': 'https://weborder.id/pbs/Store/StoreMainController',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': 'ci_session=j7c0d2bgvm60bus7ceg10dss56m4b5d7; csrf_cookie_name=0ae0693311aa9e9e287cf93d689ab902',
+    'cookie': 'ci_session=tt33nc0b2kkr7a1u12s0sth2ngnspi7t; csrf_cookie_name=e3994ae85295f94811850ee8d2a9e7fa',
 }
-
-
 
     return headers
