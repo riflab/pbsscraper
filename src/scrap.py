@@ -11,7 +11,6 @@ from headers import hd
 from mod import judul_checker, print_bukalapak, print_tokopedia, image_rename, deskripsi_checker
 import requests
 import re
-from datetime import datetime
 import xlsxwriter
 
 def scrap(index, index_BL, index_TP, response, BL, f_bukalapak, TP, f_tokopedia, penerbit='-'):

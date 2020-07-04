@@ -9,6 +9,7 @@ email: arif.darmawan@riflab.com
 from bs4 import BeautifulSoup as soup
 from headers import hd
 from scrap import scrap
+from datetime import datetime
 import requests
 import re
 import xlsxwriter
@@ -50,7 +51,7 @@ if __name__ == '__main__':
     
     d = datetime.now().date()
     BL = xlsxwriter.Workbook('../dokumen/BL_' + str(d) + '_.xlsx')
-    TP = xlsxwriter.Workbook('../dokumen/BL_' + str(d) + '_.xlsx')
+    TP = xlsxwriter.Workbook('../dokumen/TP_' + str(d) + '_.xlsx')
     main(url, headers, BL, TP)
     BL.close()
     TP.close()

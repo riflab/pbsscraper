@@ -19,7 +19,7 @@ def hd():
     'sec-fetch-dest': 'document',
     'referer': 'https://weborder.id/pbs/Store/StoreMainController',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': 'ci_session=tt33nc0b2kkr7a1u12s0sth2ngnspi7t; csrf_cookie_name=e3994ae85295f94811850ee8d2a9e7fa',
+    'cookie': 'ci_session=vpkm4p8l3em7kjn7euart5dn9kc240r7; csrf_cookie_name=3fa263f63b1b2cb92d574b5d1ba130fd',
 }
 
     return headers
