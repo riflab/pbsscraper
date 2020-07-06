@@ -14,19 +14,20 @@ import requests
 import re
 import xlsxwriter
 
-def main(url, headers, BL, TP):
+def main(url, headers, BL, TP, SP):
     response = requests.get(url, headers=headers)
     page_soup = soup(response.text, "html.parser")
     list_pub = page_soup.find_all("ul",{"class":"dropdown-menu"})[3]
 
     temp = list_pub.find_all('a')
     
-    index = index_BL = index_TP = 0
-    f_bukalapak = f_tokopedia = ''
+    index = index_BL = index_TP = index_SP = 0
+    BLws = TPws = SPws = ''
 
     for i in range(0, len(temp)):
         penerbit = temp[i].text
-        penerbit = re.sub(' +', ' ', penerbit)
+        # penerbit = re.sub(' +', ' ', penerbit)
+        penerbit = ' '.join(penerbit.split())
         url = temp[i].get('href')
         print(penerbit)
 
@@ -34,7 +35,7 @@ def main(url, headers, BL, TP):
 
             response = requests.get(url, headers=headers)
                
-            index, index_BL, index_TP, f_bukalapak, f_tokopedia = scrap(index, index_BL, index_TP, response, BL, f_bukalapak, TP, f_tokopedia, penerbit)
+            index, index_BL, index_TP, index_SP, BLws, TPws, SPws = scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP, SPws, penerbit)
             
             page_soup = soup(response.text, "html.parser")
             next_page = page_soup.findAll("li",{"class":"next page"})
@@ -52,6 +53,8 @@ if __name__ == '__main__':
     d = datetime.now().date()
     BL = xlsxwriter.Workbook('../dokumen/BL_' + str(d) + '_.xlsx')
     TP = xlsxwriter.Workbook('../dokumen/TP_' + str(d) + '_.xlsx')
-    main(url, headers, BL, TP)
+    SP = xlsxwriter.Workbook('../dokumen/SP_' + str(d) + '_.xlsx')
+    main(url, headers, BL, TP, SP)
     BL.close()
     TP.close()
+    SP.close()
