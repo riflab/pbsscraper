@@ -26,7 +26,6 @@ def main(url, headers, BL, TP, SP):
 
     for i in range(0, len(temp)):
         penerbit = temp[i].text
-        # penerbit = re.sub(' +', ' ', penerbit)
         penerbit = ' '.join(penerbit.split())
         url = temp[i].get('href')
         print(penerbit)

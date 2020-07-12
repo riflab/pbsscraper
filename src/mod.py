@@ -19,7 +19,8 @@ def deskripsi_checker(text):
     return text
 
 def image_rename(image_name):
-    
+
+    image_name = ' '.join(image_name.split())
     image_name = image_name.replace(' ', '-')    
     
     return image_name
@@ -49,6 +50,8 @@ def markup_beli(beli):
 def judul_checker(judul, penerbit):
     
     judul = ' '.join(judul.split()).title()
+    judul = judul.replace('(', ' ')
+    judul = judul.replace(')', ' ')
     temp = judul
     temp = judul.split()
     
@@ -74,7 +77,7 @@ def print_BL(index_BL, BLws, judul, stok, berat, beli, tag, penerbit, url_gambar
     stok = stok_checker(stok)
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
-    desc = desc + ' \n\n' + desc_text  
+    desc = desc + ' \n\n' + judul
 
     BLws.write(index_BL, 1, judul[:150])
     BLws.write(index_BL, 2, stok)
@@ -105,7 +108,7 @@ def print_TP(index_TP, TPws, judul, stok, berat, beli, tag, penerbit, url_gambar
     stok = stok_checker(stok)
 
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
-    desc = desc + ' \n\n' + desc_text 
+    desc = desc + ' \n\n' + judul 
 
     TPws.write(index_TP, 1, judul[:70])
     TPws.write(index_TP, 2, SKU)
@@ -129,7 +132,7 @@ def print_SP(index_SP, SPws, judul, stok, berat, beli, tag, penerbit, url_gambar
     stok = stok_checker(stok)
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
-    desc = desc + ' \n\n' + desc_text
+    desc = desc + ' \n\n' + judul
 
     kategori = 16984
     SKU = 1
