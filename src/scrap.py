@@ -24,7 +24,7 @@ def scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP,
         judul = product_items[i].h3.a.text.replace(',', '.')
         judul = judul_checker(judul, penerbit)
 
-        if index % 90 == 0:
+        if index % 300 == 0:
             # BLws = open('../dokumen/BL_' + str(int(index/90)) + '_' + str(d) + '_.csv', "w")
             # BL = xlsxwriter.Workbook('../dokumen/BL_' + str(int(index/90)).zfill(2) + '_' + str(d) + '_.xlsx')
             BLws = BL.add_worksheet()
@@ -49,17 +49,17 @@ def scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP,
                 b = product_items[i].find_all("div",{"class":"pi-price"})
                 jual = b[0].text.split()[2].split('.')[1].replace(',', '')
                 beli = b[0].text.split()[6].replace(',', '')
-                deskripsi = desc[i].text.strip()
                 
+                deskripsi = desc[i].text.strip()
+                desc_text = deskripsi_checker(str(deskripsi))
+
                 temp1 = image_rename(penerbit)
                 temp2 = image_rename(judul)
-                
+
                 d = open('../deskripsi/' + temp1 + '___' + temp2 + '.txt','w')
-                
-                desc_text = deskripsi_checker(str(deskripsi))
-                
                 d.write(desc_text)
-                d.close()       
+                d.close()
+
                 print(index, judul, penerbit)
                 
                 url_gambar = '../gambar/' + temp1 + '___' + temp2 + '.jpg'

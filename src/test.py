@@ -1,7 +1,6 @@
 import re
-b = ' aada sfgdrgd dt      fthfth fthfth     fthfh fthfthfth'
+b = ' aada sfgdrgd dt      fthfth fthfth  ()   fthfh fthfthfth'
 
-# b = re.sub(' +', ' ', b)
-b = ' '.join(b.split())
+b = b.replace('(', ' ')
 
 print(b)
