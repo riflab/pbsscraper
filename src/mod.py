@@ -77,7 +77,7 @@ def print_BL(index_BL, BLws, judul, stok, berat, beli, tag, penerbit, url_gambar
     stok = stok_checker(stok)
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
-    desc = desc + ' \n\n' + judul
+    desc = judul + '. ' + desc
 
     BLws.write(index_BL, 1, judul[:150])
     BLws.write(index_BL, 2, stok)
@@ -108,7 +108,7 @@ def print_TP(index_TP, TPws, judul, stok, berat, beli, tag, penerbit, url_gambar
     stok = stok_checker(stok)
 
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
-    desc = desc + ' \n\n' + judul 
+    desc = judul + '. ' + desc 
 
     TPws.write(index_TP, 1, judul[:70])
     TPws.write(index_TP, 2, SKU)
@@ -132,7 +132,7 @@ def print_SP(index_SP, SPws, judul, stok, berat, beli, tag, penerbit, url_gambar
     stok = stok_checker(stok)
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
-    desc = desc + ' \n\n' + judul
+    desc = judul + '. ' + desc
 
     kategori = 16984
     SKU = 1
@@ -164,5 +164,66 @@ def print_SP(index_SP, SPws, judul, stok, berat, beli, tag, penerbit, url_gambar
     SPws.write(index_SP, 25, '')
     SPws.write(index_SP, 26, '')
     SPws.write(index_SP, 27, 'Aktif')
-    # SPws.write(index_SP, 28, '')
-    # SPws.write(index_SP, 29, '')
+    SPws.write(index_SP, 28, '7 - 15')
+    SPws.write(index_SP, 29, penerbit)
+    SPws.write(index_SP, 30, tag)
+
+def print_TA(index_TA, TAws, judul, stok, berat, beli, tag, penerbit, url_gambar, desc_text, jual):
+    
+    domain = 'https://alhaf.com/'
+    beli = markup_beli(beli)
+    stok = stok_checker(stok)
+    
+    desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
+    desc = judul + '. ' + desc
+
+    
+    SKU = '10110000'+str(index_TA)
+
+    TAws.write(index_TA, 1, index_TA)
+    TAws.write(index_TA, 2, 'simple')
+    TAws.write(index_TA, 3, SKU)
+    TAws.write(index_TA, 4, judul)
+    TAws.write(index_TA, 5, '1')
+    TAws.write(index_TA, 6, '0')
+    TAws.write(index_TA, 7, 'visible')
+    TAws.write(index_TA, 8, penerbit)
+    TAws.write(index_TA, 9, desc)
+    TAws.write(index_TA, 10, '')
+    TAws.write(index_TA, 11, '')
+    TAws.write(index_TA, 12, '')
+    TAws.write(index_TA, 13, '')
+    TAws.write(index_TA, 14, '1')
+    TAws.write(index_TA, 15, stok)
+    TAws.write(index_TA, 16, '')
+    TAws.write(index_TA, 17, '0')
+    TAws.write(index_TA, 18, '0')
+    TAws.write(index_TA, 19, int(berat)/1000)
+    TAws.write(index_TA, 20, '')
+    TAws.write(index_TA, 21, '')
+    TAws.write(index_TA, 22, '')
+    TAws.write(index_TA, 23, '0')
+    TAws.write(index_TA, 24, '')
+    TAws.write(index_TA, 25, beli)
+    TAws.write(index_TA, 26, jual)
+    TAws.write(index_TA, 27, tag)
+    TAws.write(index_TA, 28, tag)
+    TAws.write(index_TA, 29, '')
+    TAws.write(index_TA, 30, domain + url_gambar)
+    TAws.write(index_TA, 31, '')
+    TAws.write(index_TA, 32, '')
+    TAws.write(index_TA, 33, '')
+    TAws.write(index_TA, 34, '')
+    TAws.write(index_TA, 35, '')
+    TAws.write(index_TA, 36, '')
+    TAws.write(index_TA, 37, '')
+    TAws.write(index_TA, 38, '')
+    TAws.write(index_TA, 39, '0')
+    TAws.write(index_TA, 40, 'Penerbit')
+    TAws.write(index_TA, 41, penerbit)
+    TAws.write(index_TA, 42, '1')
+    TAws.write(index_TA, 43, '1')
+    TAws.write(index_TA, 44, '')
+    TAws.write(index_TA, 45, '')
+    TAws.write(index_TA, 46, '')
+    TAws.write(index_TA, 47, '')

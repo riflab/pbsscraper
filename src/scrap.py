@@ -8,12 +8,12 @@ email: arif.darmawan@riflab.com
 
 from bs4 import BeautifulSoup as soup
 from headers import hd
-from mod import judul_checker, print_BL, print_TP, print_SP, image_rename, deskripsi_checker
+from mod import judul_checker, print_BL, print_TP, print_SP, print_TA, image_rename, deskripsi_checker
 from datetime import datetime
 import requests
 import xlsxwriter
 
-def scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP, SPws, penerbit='-'):
+def scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP, TPws, SP, SPws, TA, TAws, penerbit='-'):
     page_soup = soup(response.text, "html.parser")
     
     product_items = page_soup.find_all("div",{"class":"product-item"})
@@ -37,6 +37,8 @@ def scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP,
         if index % 3000 == 0:
             SPws = SP.add_worksheet()
             index_SP = 1
+            TAws = TA.add_worksheet()
+            index_TA = 1
 
         try:
             atemp = product_items[i].find_all('p')
@@ -67,6 +69,7 @@ def scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP,
                 print_BL(index_BL, BLws, judul, stok, berat, beli, tag, penerbit, url_gambar[3:], desc_text)
                 print_TP(index_TP, TPws, judul, stok, berat, beli, tag, penerbit, url_gambar[3:], desc_text)
                 print_SP(index_SP, SPws, judul, stok, berat, beli, tag, penerbit, url_gambar[3:], desc_text)
+                print_TA(index_TA, TAws, judul, stok, berat, beli, tag, penerbit, url_gambar[3:], desc_text, jual)
                 
                 link_img = images[i].img.get("src")
                 with open(url_gambar, "wb") as img:
@@ -76,13 +79,14 @@ def scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP,
                 index_BL += 1
                 index_TP += 1
                 index_SP += 1
+                index_TA += 1
 
         except: 
             stok = berat = tag = jual = beli = '-'
             
             pass
         
-    return index, index_BL, index_TP, index_SP, BLws, TPws, SPws
+    return index, index_BL, index_TP, index_SP, index_TA, BLws, TPws, SPws, TAws
     
 
 if __name__ == '__main__':
@@ -90,14 +94,16 @@ if __name__ == '__main__':
     url = 'https://weborder.id/pbs/Store/StoreMainController/suppub/1/10/0'
     response = requests.get(url, headers=headers)
     
-    index = index_BL = index_TP = index_SP = 0
-    BLws = TPws = SPws = ''
+    index = index_BL = index_TP = index_SP = index_TA = 0
+    BLws = TPws = SPws = TAws = ''
 
     d = datetime.now().date()
     BL = xlsxwriter.Workbook('../dokumen/BL_' + str(d) + '_.xlsx')
     TP = xlsxwriter.Workbook('../dokumen/TP_' + str(d) + '_.xlsx')
     SP = xlsxwriter.Workbook('../dokumen/SP_' + str(d) + '_.xlsx')
-    index, index_BL, index_TP, index_SP, BLws, TPws, SPws = scrap(index, index_BL, index_TP, index_SP, response, BL, BLws, TP, TPws, SP, SPws, 'ADZ DHAHABI')
+    TA = xlsxwriter.Workbook('../dokumen/TA_' + str(d) + '_.xlsx')
+    index, index_BL, index_TP, index_SP, index_TA, BLws, TPws, SPws, TAws = scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP, TPws, SP, SPws, TA, TAws, 'ADZ DHAHABI')
     BL.close()
     TP.close()
     SP.close()
+    TA.close()
