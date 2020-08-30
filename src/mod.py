@@ -42,7 +42,7 @@ def stok_checker(stok):
 def markup_beli(beli):
 
     beli = int(beli)
-    beli = (beli*115/100)+2000
+    beli = (beli*110/100)+2000
     beli = roundup(beli)
 
     return str(beli)
@@ -78,6 +78,7 @@ def print_BL(index_BL, BLws, judul, stok, berat, beli, tag, penerbit, url_gambar
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
     desc = judul + '. ' + desc
+    desc = desc_text
 
     BLws.write(index_BL, 1, judul[:150])
     BLws.write(index_BL, 2, stok)
@@ -109,21 +110,31 @@ def print_TP(index_TP, TPws, judul, stok, berat, beli, tag, penerbit, url_gambar
 
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
     desc = judul + '. ' + desc 
+    desc = desc_text
 
-    TPws.write(index_TP, 1, judul[:70])
-    TPws.write(index_TP, 2, SKU)
-    TPws.write(index_TP, 3, tagN)
-    TPws.write(index_TP, 4, desc)
-    TPws.write(index_TP, 5, beli)
-    TPws.write(index_TP, 6, berat)
-    TPws.write(index_TP, 7, 1)
-    TPws.write(index_TP, 8, 'Aktif')
-    TPws.write(index_TP, 9, stok)
-    TPws.write(index_TP, 10, etalase)
+
+    TPws.write(index_TP, 1, '')
+    TPws.write(index_TP, 2, judul[:70])
+    TPws.write(index_TP, 3, desc)
+    TPws.write(index_TP, 4, tagN)
+    TPws.write(index_TP, 5, berat)
+    TPws.write(index_TP, 6, '1')
+    TPws.write(index_TP, 7, etalase)
+    TPws.write(index_TP, 8, '')
+    TPws.write(index_TP, 9, 'Baru')
+    TPws.write(index_TP, 10, domain + url_gambar)
     TPws.write(index_TP, 11, '')
     TPws.write(index_TP, 12, '')
-    TPws.write(index_TP, 13, 'Baru')
-    TPws.write(index_TP, 14, domain + url_gambar)
+    TPws.write(index_TP, 13, '')
+    TPws.write(index_TP, 14, '')
+    TPws.write(index_TP, 15, '')
+    TPws.write(index_TP, 16, '')
+    TPws.write(index_TP, 17, '')
+    TPws.write(index_TP, 18, '')
+    TPws.write(index_TP, 19, 'Aktif')
+    TPws.write(index_TP, 20, stok)
+    TPws.write(index_TP, 21, beli)
+    TPws.write(index_TP, 22, 'opsional')
 
 def print_SP(index_SP, SPws, judul, stok, berat, beli, tag, penerbit, url_gambar, desc_text):
     
@@ -133,6 +144,7 @@ def print_SP(index_SP, SPws, judul, stok, berat, beli, tag, penerbit, url_gambar
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
     desc = judul + '. ' + desc
+    desc = desc_text
 
     kategori = 16984
     SKU = 1
@@ -176,6 +188,7 @@ def print_TA(index_TA, TAws, judul, stok, berat, beli, tag, penerbit, url_gambar
     
     desc = 'Silahkan chat terlebih dahulu untuk menanyakan ketersediaan stok barang.'  
     desc = judul + '. ' + desc
+    desc = desc_text
 
     
     SKU = '10110000'+str(index_TA)

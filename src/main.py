@@ -8,14 +8,14 @@ email: arif.darmawan@riflab.com
 
 from bs4 import BeautifulSoup as soup
 from headers import hd
-from scrap import scrap
+from scrap import scrap        
 from datetime import datetime
 import requests
 import re
 import xlsxwriter
 
-def main(url, headers, BL, TP, SP, TA):
-    response = requests.get(url, headers=headers)
+def main(url, headers, cookies, BL, TP, SP, TA):
+    response = requests.get(url, headers=headers, cookies=cookies)
     page_soup = soup(response.text, "html.parser")
     list_pub = page_soup.find_all("ul",{"class":"dropdown-menu"})[3]
 
@@ -28,12 +28,13 @@ def main(url, headers, BL, TP, SP, TA):
         penerbit = temp[i].text
         penerbit = ' '.join(penerbit.split())
         url = temp[i].get('href')
-        print(penerbit)
 
         while True:
 
-            response = requests.get(url, headers=headers)
-               
+            print(penerbit)
+
+            response = requests.get(url, headers=headers, cookies=cookies)
+
             index, index_BL, index_TP, index_SP, index_TA, BLws, TPws, SPws, TAws = scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP, TPws, SP, SPws, TA, TAws, penerbit)
             
             page_soup = soup(response.text, "html.parser")
@@ -46,15 +47,15 @@ def main(url, headers, BL, TP, SP, TA):
                 break
 
 if __name__ == '__main__':
-    headers = hd()
+    headers, cookies = hd()
     url = 'https://weborder.id/pbs/Store/StoreMainController'
     
     d = datetime.now().date()
-    BL = xlsxwriter.Workbook('../dokumen/BL_' + str(d) + '_.xlsx')
-    TP = xlsxwriter.Workbook('../dokumen/TP_' + str(d) + '_.xlsx')
-    SP = xlsxwriter.Workbook('../dokumen/SP_' + str(d) + '_.xlsx')
-    TA = xlsxwriter.Workbook('../dokumen/TA_' + str(d) + '_.xlsx')
-    main(url, headers, BL, TP, SP, TA)
+    BL = xlsxwriter.Workbook('../dokumen/' + str(d) + '_BL_.xlsx')
+    TP = xlsxwriter.Workbook('../dokumen/' + str(d) + '_TP_.xlsx')
+    SP = xlsxwriter.Workbook('../dokumen/' + str(d) + '_SP_.xlsx')
+    TA = xlsxwriter.Workbook('../dokumen/' + str(d) + '_TA_.xlsx')
+    main(url, headers, cookies, BL, TP, SP, TA)
     BL.close()
     TP.close()
     SP.close()
