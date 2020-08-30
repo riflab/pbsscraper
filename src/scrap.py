@@ -10,12 +10,14 @@ from bs4 import BeautifulSoup as soup
 from headers import hd
 from mod import judul_checker, print_BL, print_TP, print_SP, print_TA, image_rename, deskripsi_checker
 from datetime import datetime
+from test import test
 import requests
 import xlsxwriter
 
 def scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP, TPws, SP, SPws, TA, TAws, penerbit='-'):
     page_soup = soup(response.text, "html.parser")
     
+    # test(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP, TPws, SP, SPws, TA, TAws, '-')
     product_items = page_soup.find_all("div",{"class":"product-item"})
     desc = page_soup.find_all("div",{"class":"description"})
     images = page_soup.find_all("div",{"class":"product-main-image"})
@@ -23,8 +25,8 @@ def scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP,
     for i in range(0, len(product_items)):
         judul = product_items[i].h3.a.text.replace(',', '.')
         judul = judul_checker(judul, penerbit)
-
-        if index % 300 == 0:
+        
+        if index % 150 == 0:
             # BLws = open('../dokumen/BL_' + str(int(index/90)) + '_' + str(d) + '_.csv', "w")
             # BL = xlsxwriter.Workbook('../dokumen/BL_' + str(int(index/90)).zfill(2) + '_' + str(d) + '_.xlsx')
             BLws = BL.add_worksheet()
@@ -90,18 +92,18 @@ def scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP,
     
 
 if __name__ == '__main__':
-    headers = hd()
+    headers, cookies = hd()
     url = 'https://weborder.id/pbs/Store/StoreMainController/suppub/1/10/0'
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, cookies=cookies)
     
     index = index_BL = index_TP = index_SP = index_TA = 0
     BLws = TPws = SPws = TAws = ''
 
     d = datetime.now().date()
-    BL = xlsxwriter.Workbook('../dokumen/BL_' + str(d) + '_.xlsx')
-    TP = xlsxwriter.Workbook('../dokumen/TP_' + str(d) + '_.xlsx')
-    SP = xlsxwriter.Workbook('../dokumen/SP_' + str(d) + '_.xlsx')
-    TA = xlsxwriter.Workbook('../dokumen/TA_' + str(d) + '_.xlsx')
+    BL = xlsxwriter.Workbook('../dokumen/' + str(d) + '_BL_.xlsx')
+    TP = xlsxwriter.Workbook('../dokumen/' + str(d) + '_TP_.xlsx')
+    SP = xlsxwriter.Workbook('../dokumen/' + str(d) + '_SP_.xlsx')
+    TA = xlsxwriter.Workbook('../dokumen/' + str(d) + '_TA_.xlsx')
     index, index_BL, index_TP, index_SP, index_TA, BLws, TPws, SPws, TAws = scrap(index, index_BL, index_TP, index_SP, index_TA, response, BL, BLws, TP, TPws, SP, SPws, TA, TAws, 'ADZ DHAHABI')
     BL.close()
     TP.close()
